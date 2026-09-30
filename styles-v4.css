@@ -22,15 +22,8 @@ footer{padding:34px 0;background:#051327;color:#91a5ba}.footer-inner{display:gri
   .brand img{height:48px;max-width:142px}
   .footer-brand{align-items:center}
   .footer-brand img{height:96px;max-width:190px;margin:auto}
-}
-@media(max-width:640px){
-  .brand img{height:44px;max-width:132px}
-  .buy-brand img{height:82px;max-width:180px}
-  .footer-brand img{height:90px;max-width:180px}
-}
-@media (max-width: 768px) {
-  .hero::before,
-  .hero::after {
+@media (max-width: 640px) {
+  .hero-glow {
     display: none !important;
   }
 }
