@@ -1,4 +1,6 @@
-const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}})},{threshold:.1});
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
-const toggle=document.querySelector('.menu-toggle');const menu=document.querySelector('.mobile-menu');if(toggle&&menu){toggle.addEventListener('click',()=>{const open=menu.classList.toggle('open');toggle.setAttribute('aria-expanded',String(open))});menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu.classList.remove('open');toggle.setAttribute('aria-expanded','false')}))}
+const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const revealEls=document.querySelectorAll('.reveal');
+if(reduceMotion||!('IntersectionObserver' in window)){revealEls.forEach(el=>el.classList.add('visible'));}else{const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}})},{threshold:.1});revealEls.forEach(el=>observer.observe(el));}
+const toggle=document.querySelector('.menu-toggle');const menu=document.querySelector('.mobile-menu');
+if(toggle&&menu){const closeMenu=()=>{menu.classList.remove('open');toggle.setAttribute('aria-expanded','false')};toggle.addEventListener('click',()=>{const open=menu.classList.toggle('open');toggle.setAttribute('aria-expanded',String(open))});menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});}
 const buyButton=document.getElementById('buyButton');const toast=document.getElementById('toast');if(buyButton&&toast){buyButton.addEventListener('click',()=>{toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),3200)})}
